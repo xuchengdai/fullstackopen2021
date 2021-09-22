@@ -5,9 +5,14 @@ const Button = (props) => {
 };
 const StatisticLine = ({ text, value }) => {
   return (
-    <p>
-      {text} {value}
-    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>{text}</td>
+          <td>{value}</td>
+        </tr>
+      </tbody>
+    </table>
   );
 };
 const Statistics = (props) => {
