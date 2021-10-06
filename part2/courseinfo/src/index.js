@@ -13,14 +13,12 @@ const Header = ({ course }) => {
 //   return <p>Number of exercises {sum}</p>;
 // };
 const Total = ({ course }) => {
-  let sum = 0;
-  course.parts.map((part) => (sum += part.exercises));
+  let sum = course.parts.reduce((s, p) => s + p.exercises, 0);
 
   return <div>total of {sum} exercises</div>;
 };
 
 const Part = ({ part }) => {
-  console.log("props", part);
   return (
     <p>
       {part.name} {part.exercises}
