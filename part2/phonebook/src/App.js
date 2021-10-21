@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import Person from "./components/person";
+import Person from "./components/Person";
+import Persons from "./components/Persons";
+import Filter from "./components/Filter";
+import PersonFrom from "./components/PersonForm";
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456", id: 1 },
@@ -11,7 +14,6 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [result, setResult] = useState([]);
 
-  // const [search, setSearch] = useState("");
   const handleNameChange = (event) => {
     setNewName(event.target.value);
   };
@@ -39,35 +41,28 @@ const App = () => {
           person.name.toUpperCase().includes(event.target.value.toUpperCase())
         )
       );
+    } else {
+      setResult([]);
     }
   };
-
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with {<input onChange={handleSearchChange} />}
-        <div>
-          {result.map((person) => (
-            <Person person={person} key={person.name} />
-          ))}
-        </div>
-      </div>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <div>
-        {persons.map((person) => (
-          <Person person={person} key={person.name} />
-        ))}
-      </div>
+      <Filter
+        result={result}
+        persons={persons}
+        handleSearchChange={handleSearchChange}
+      />
+      <h3>Add a new</h3>
+      <PersonFrom
+        newName={newName}
+        newNumber={newNumber}
+        addPerson={addPerson}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+      />
+      <h3>Numbers</h3>
+      <Persons persons={persons} />
     </div>
   );
 };
